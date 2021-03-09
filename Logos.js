@@ -7,16 +7,16 @@ import {
   Image
 } from 'react-native';
 
-import logo from '../../images/logo.png';
+import logos from '../../images/logos.png';
 
-export default class Logo extends React.Component {
+export default class Logos extends React.Component {
   render(){
   return (
     
            <View style={styles.container}>
-             <Image source={logo}
+             <Image source={logos}
              resizeMode={'contain'}
-             style={{   justifyContent: 'center',alignItems: 'center',marginTop:-100,marginBottom:-50,width:250, height:250}}/>
+            style={{   justifyContent: 'center',alignItems: 'center',width:150, height:150}}/>
              
 
            </View>

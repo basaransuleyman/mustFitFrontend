@@ -9,18 +9,26 @@ import {
   Text,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const { width: WIDTH } = Dimensions.get('window');
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const styletoast={backgroundColor: "red",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+const stylesuccess ={backgroundColor: "green",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
 
 import Logo from '../pages/Logo';
 export default class SignUp extends React.Component {
 
 
   state = {
-   email: '', password: ''
+   email: '', password: '' , isLoading:false
   }
 
   onChangeText = (key, val) => {
@@ -29,10 +37,17 @@ export default class SignUp extends React.Component {
 
 
 
+
   signUp = async ()=> {
     const { email, password } = this.state
     const {navigate} = this.props.navigation;
 
+if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
+{
+  Toast.show('Email  must be this way like this blabla@gmail.com',Toast.LONG,Toast.TOP,styletoast);
+ return
+            
+}
     fetch("http://10.0.2.2:3000/signup",{
        method:"POST",
        headers: {
@@ -47,41 +62,51 @@ export default class SignUp extends React.Component {
      .then(async (data)=>{
             try {
              await AsyncStorage.setItem('token',data.token)
-             
-                   Alert.alert("Signup is Succes  ", );
+             Toast.show('Registration Successful' ,Toast.LONG,Toast.TOP,stylesuccess);
              navigate('Login');
               
             } catch (error) {  
               console.log("error hai",e)
-              Alert.alert(
-              "This Email have use already  ",  );
+               Toast.show('This mail is use already' ,Toast.SHORT, Toast.TOP,styletoast);
             }
     })
   }
  
   render() {
-    return (
 
+     const {isLoading}=this.state
+    return (
+ 
       <ImageBackground 
   source={require('../../images/registerback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
+<KeyboardAvoidingView enabled behavior={ Platform.OS === 'ios'? 'padding': null}
+                style= {styles.FlexGrowOne}>
 
+
+           
+      
+    
 
    <View style={styles.container}>
     <Logo/>
 
-   <Text style={styles.input}>Join Us</Text>
+<View style={styles.sideByside}>
+  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:20,marginTop:20}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:20,marginTop:20}}>FIT</Text>
+    <Text style={{fontSize:15,color:'black',marginTop:0,marginBottom:20,marginTop:20,marginLeft:20}}>SIGNUP </Text>
+</View>
 
    <View style={styles.inputContainer}>
 
 
-         <TextInput
-             style={styles.inputs}
-          placeholder='Email'
-          autoCapitalize="none"
-          value={this.state.email}
-          onChangeText={val => this.onChangeText('email', val)}
-        />
+           <TextInput
+               style={styles.inputs}
+            placeholder='Username'
+            autoCapitalize="none"
+            value={this.state.email}
+            onChangeText={val => this.onChangeText('email', val)}
+          />
        
         </View>
 
@@ -99,15 +124,14 @@ export default class SignUp extends React.Component {
 
       </View>
 
-
-
-
-
             <TouchableOpacity style={styles.submitButtonText}
               onPress={this.signUp}>
-             <Text style={styles.signUpText}>SignUp</Text>
+              {this.state.isLoading ? (
+                <ActivityIndicator animating={this.state.isLoading} size={"large"} color={"white"} />
+                ) : (
+                  <Text style={styles.signUpText}>Signup</Text>
+                )}
              </TouchableOpacity>
-
 
             <TouchableOpacity style={styles.submitButtonTextone}
               onPress={()=>this.props.navigation.navigate('Login')}>
@@ -115,7 +139,9 @@ export default class SignUp extends React.Component {
              
              </TouchableOpacity>
       </View>
+            </KeyboardAvoidingView>
       </ImageBackground>
+
      
     )
   }
@@ -128,6 +154,9 @@ const styles = StyleSheet.create({
 
 
   },
+    FlexGrowOne: {
+        flexGrow : 1
+    },
   input: {
    margin: 0,
    fontSize: 25,
@@ -152,6 +181,11 @@ const styles = StyleSheet.create({
    marginTop:10,
 
  },
+  sideByside:{
+  alignItems:'center',
+  justifyContent:'center',
+  flexDirection:'row',
+},
 
  submitButtonTextone:{
   color: '#FFFFFF',
@@ -187,3 +221,4 @@ const styles = StyleSheet.create({
    flex:1,
   },
 })
+

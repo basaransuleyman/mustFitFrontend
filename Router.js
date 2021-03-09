@@ -9,9 +9,13 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import BilgilerErkek from './pages/BilgilerErkek';
 import BilgilerKadın from './pages/BilgilerKadın';
-import Profile from './pages/Profile';
 import Cinsiyet from './pages/Cinsiyet';
 import Aktiflik from './pages/Aktiflik';
+import Profile from './pages/Profile';
+import Diet from './pages/Diet';
+import Splash from './pages/Splash';
+import LogoSplash from './pages/LogoSplash';
+
 
 
 
@@ -20,6 +24,12 @@ const AppSwitchNavigator = createSwitchNavigator(
             {
              SignUp:{
              	screen:SignUp
+             },
+             Splash:{
+                  screen:Splash
+             },
+             LogoSplash:{
+                  screen:LogoSplash
              },
              Welcome:{
                    screen:Welcome
@@ -30,21 +40,24 @@ const AppSwitchNavigator = createSwitchNavigator(
              Aktiflik:{
                   screen:Aktiflik
              },
+             Profile:{
+                  screen:Profile
+             },
               BilgilerKadın:{
                  screen:BilgilerKadın
              },
-            Profile:{
-                 screen:Profile
-            },
             Cinsiyet:{
                   screen:Cinsiyet
             },  
+            Diet:{
+                  screen:Diet
+            },
            Login:{
             	screen:Login
             }
            },
             {
-               initalRootName:'Welcome'
+               initialRouteName:"LogoSplash"
             }
 
 	);

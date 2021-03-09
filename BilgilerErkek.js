@@ -10,79 +10,114 @@ import {
   Alert,
   Platform,
   ImageBackground,
+  KeyboardAvoidingView,
+
 } from 'react-native';
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-
+import { Container, Header, Content, Picker, Form } from "native-base";
+import Toast from 'react-native-toast-native';
 import Logo from '../pages/Logo';
 
 
-export default class Bilgiler extends Component {
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const styletoast={backgroundColor: "red",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+const stylesuccess ={backgroundColor: "green",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+
+export default class BilgilerErkek extends Component {
 
 
-  state = {
+
+ constructor(props) {
+  super(props);
+  this.state = {
   age:'',
   name:'',
+  yagOrani:'',  
+  message:'',
+  messagetwo:'',
+  messageone:'',
+  bm:'',
+  dealweight:'',
+  bmr:'',
   height:'',
   weight:'',
   neck:'',
+  hip:'0',
   belly:'',
-  hip:'',
+  selected:'key1',
+  choices:'choice0',
+  };
   }
 
-  onChangeText = (key, val) => {
+
+
+
+ onChangeText = (key, val) => {
     this.setState({ [key]: val })
   }
 
 
 
+ onValueChange(value: string) {
+    this.setState({
+      selected: value
+    });
+  }
+
+
+ onValuesChange(value: string) {
+    this.setState({
+      choices: value
+    });
+  }
+
   sumbitData = async ()=> {
    const token = await AsyncStorage.getItem("jwt")
-   const {name, age, height, weight, neck, belly, hip} = this.state
+   const {name, age,yagOrani,messagetwo,message,messageone,bm,dealweight,bmr,height, weight, neck,hip, belly,selected,choices} = this.state
    const {navigate} = this.props.navigation;
 
-    fetch("http://10.0.2.2:3000/createpost",{
+    fetch("http://10.0.2.2:3000/createpostforman",{
        method:"POST",
        headers: {
         'Content-Type': 'application/json',
         'Authorization':'Bearer '+ token
       },
       body:JSON.stringify({
-        name,
-        age,
-        height,
-        weight,
-        neck,
-        belly,
-        hip
+    name,
+    age,
+    yagOrani,
+    message,
+    messagetwo,
+    messageone,
+    bm,
+    dealweight,
+    bmr,
+    height,
+    weight,
+    neck,
+    hip,
+    belly,
+    selected,
+    choices
       })
     })
     .then(res=>res.json())
      .then(async (data)=>{
-           try {      
-               Alert.alert("Yes !  " + name + " let's be fit")
-               navigate('Profile');
+           try {     
+               navigate('Splash');
              }
              catch (e) {
                 console.log("error hai",e) 
-                Alert.alert("ERROR")
+                Toast.show('Fill in all fields correctly' ,Toast.LONG,Toast.TOP,styletoast);
              }
 
             })
   }
 
-
-
-
-               
-            
-              
-     
- 
- 
 
 
     render() {
@@ -93,12 +128,13 @@ export default class Bilgiler extends Component {
   source={require('../../images/back.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
 
-         
+                  <KeyboardAvoidingView enabled behavior={ Platform.OS === 'ios'? 'padding': null}
+                style= {styles.FlexGrowOne}>  
 
 
               <TouchableOpacity style={styles.buttonback}
              onPress={()=>this.props.navigation.navigate('Cinsiyet')}>
-             <Text style={{   color: 'black',    fontWeight: 'bold',alignItems: 'center',fontSize: 25,transform: [{ rotate: '180deg' }]}}>></Text>
+             <Text style={{   color: '#24465c',    fontWeight: 'bold',alignItems: 'center',fontSize: 25,transform: [{ rotate: '180deg' }]}}>></Text>
              </TouchableOpacity>
 
           
@@ -106,11 +142,15 @@ export default class Bilgiler extends Component {
                 <View style={styles.cheks}>  
 
 
-                         <Text style={styles.texts}>INFORMATIONS</Text>
+                         
 
 
+ <View style={styles.sideByside}>
 
-                 
+  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:30,marginTop:0}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:30,marginTop:0,}}>FIT</Text>
+   <Text style={{fontSize:15,color:'white',marginTop:0,marginBottom:30,marginTop:0,marginLeft:20}}>INFORMATIONS </Text>
+</View>
 
                 <View style={styles.buttons}>
            
@@ -121,6 +161,7 @@ export default class Bilgiler extends Component {
                  <TextInput style={styles.inputs}
                  placeholder="Your's name"
                  keyboardType="default"
+                 autoCapitalize="characters"
                  underlineColorAndroid='transparent'
                  value={this.state.name}
                  onChangeText={val => this.onChangeText('name',val)}/>
@@ -188,24 +229,65 @@ export default class Bilgiler extends Component {
                  onChangeText={val => this.onChangeText('belly',val)}/>
                  </View>
 
+ 
+                 </View>
 
-                
-                 </View>
-                 </View>
+
+              <View style={styles.middle}>  
+              <View style={styles.sideByside}>
+              <Text style={styles.signUpTexttwo}>Select Activity Level      </Text>
+              <TouchableOpacity style={styles.signUpTextthree}>
+            <Picker
+              note
+              mode="dropdown"
+              style={{ width: 120 }}
+              selectedValue={this.state.selected}
+              onValueChange={this.onValueChange.bind(this)}
+            >
+              <Picker.Item label="0 day"  value="key0" />
+              <Picker.Item label="1-2 days" value="key1" />
+              <Picker.Item label="3-4 days" value="key2" />
+              <Picker.Item label="5-6 days" value="key3" />
+              <Picker.Item label="7 days" value="key4" />
+            </Picker>
+            </TouchableOpacity>
+             </View>
+             </View> 
+             </View>
+
+    <View style={styles.middle}>  
+              <View style={styles.sideByside}>
+              <Text style={styles.signUpTexttwo}>Select Goal,want to be </Text>
+              <TouchableOpacity style={styles.signUpTextthree}>
+            <Picker
+              note
+              mode="dropdown"
+              style={{ width: 120 }}
+              selectedValue={this.state.choices}
+              onValueChange={this.onValuesChange.bind(this)}
+            >
+              <Picker.Item label="Lose Weight"  value="choice0" />
+              <Picker.Item label="Protect Weight" value="choice1" />
+              <Picker.Item label="Gain Weight" value="choice2" />
+            </Picker>
+            </TouchableOpacity>
+             </View>
+             </View> 
 
 
                   <View style={styles.sideByside}>
               <TouchableOpacity style={styles.signUpTextfour}
-              onPress={this.sumbitData}>
+              onPress={this.sumbitData }>
              <Text style={styles.signUpTextone}>Next</Text>
              </TouchableOpacity>
                </View>
 
 
 
+
             
               </View>
-          
+          </KeyboardAvoidingView>
 </ImageBackground>
 
         );
@@ -219,19 +301,12 @@ const styles = StyleSheet.create({
 
 
  cheks:{ 
-
-  top:40,
- 
+  top:0,
  },
-
-
 sideByside:{
-
   alignItems:'center',
   justifyContent:'center',
   flexDirection:'row',
-
-
 },
 
   active:{
@@ -239,13 +314,13 @@ sideByside:{
        color:'rgba(0, 0, 255, 1)',
        height:35,
   },  
-  buttonback:{
+ buttonback:{
    color: '#FFFFFF',
    alignItems: 'center',
    justifyContent: 'center',
    width:40,
    height:25,
-   marginTop:30,
+   marginTop:10,
 
 
   },
@@ -256,7 +331,7 @@ sideByside:{
        height:40,
        marginLeft:20,
        marginRight:20,
-       marginBottom:20,
+       marginBottom:0,
        backgroundColor:'#FF5A54',
        //flex:1,
        padding:14,
@@ -281,7 +356,7 @@ sideByside:{
     fontSize: 25,
     marginBottom:40,
     textAlign:'center',
-    marginTop:20,
+    marginTop:0,
  },
 
  inputContainer: {
@@ -318,48 +393,21 @@ sideByside:{
    margin: 15,
    height: 60,
  },
- submitButtonTextone:{
+
+ signUpTextthree:{
    color: '#FFFFFF',
-   backgroundColor: '#FF5A54',
-   width:170,
-   height:45,
-   borderRadius:10,
-   justifyContent: 'center',
    alignItems: 'center',
+   justifyContent: 'center',
+   borderBottomColor:  '#FF5A54',
+   backgroundColor:'white',
+   borderBottomWidth: 1,
+   opacity:0.8,
+   width:170,
+   height:40,
+   borderRadius:10,
    marginTop:10,
-   marginBottom:20,
-   marginLeft:5,
-   marginRight:5
- },
+    
 
-  submitButtonTexttwo:{
-   color: '#FFFFFF',
-   backgroundColor: '#FF5A54',
-   width:170,
-   height:45,
-   borderRadius:10,
-   justifyContent: 'center',
-   alignItems: 'center',
-   marginTop:50,
- },
-
-  submitButtonTextthree:{
-   color: '#FFFFFF',
-   backgroundColor: '#FF5A54',
-   width:170,
-   height:45,
-   borderRadius:10,
-   justifyContent: 'center',
-   alignItems: 'center',
-   marginTop:50,
- },
-
- submitButtonTextfour:{
-  width:170,
-   height:45,
-  justifyContent: 'center',
-   alignItems: 'center',
-   marginTop:20
  },
 
  signUpTextfour:{
@@ -368,21 +416,24 @@ sideByside:{
    justifyContent: 'center',
       color: '#FFFFFF',
    backgroundColor:'#FF5A54',
-   width:170,
+   width:120,
    height:45,
    borderRadius:10,
-   marginTop:30,
+   marginTop:20,
     
 
  },
-
-
-
-
  signUpTextone:{
    color: '#FFFFFF',
    alignItems: 'center',
    fontSize: 16,
+ },
+
+ signUpTexttwo:{
+    color: '#FFFFFF',
+   alignItems: 'center',
+   fontSize: 15,
+   marginTop:10,
  },
 
  iconbutton:{
@@ -397,7 +448,7 @@ sideByside:{
     alignItems: 'center',
     justifyContent: 'center',
     textAlign:'center',   
-    marginBottom:20
+    marginTop:0
  }
 
 })

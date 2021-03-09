@@ -9,12 +9,20 @@ import {
   Text,
   ImageBackground,
   Alert,
-  TouchableOpacity
+  ActivityIndicator,
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native'
 
-const { width: WIDTH } = Dimensions.get('window');
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const styletoast={backgroundColor: "red",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+const stylesuccess ={backgroundColor: "green",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-native';
 
 
 import Logo from '../pages/Logo';
@@ -23,7 +31,7 @@ export default class Login extends React.Component {
 
 
   state = {
-   email: '', password: ''
+   email: '', password: '' , isLoading:false
   }
 
   onChangeText = (key, val) => {
@@ -35,7 +43,7 @@ export default class Login extends React.Component {
   signUp = async ()=> {
     const { email, password } = this.state
     const {navigate} = this.props.navigation;
-    var {height, width} = Dimensions.get('window');
+    this.setState({isLoading:true})
 
     fetch("http://10.0.2.2:3000/signin",{
        method:"POST",
@@ -52,13 +60,11 @@ export default class Login extends React.Component {
             try {
              await AsyncStorage.setItem('jwt',data.token)
              navigate('Cinsiyet');
-              Alert.alert(
-      "Login is Succes  ",
-    );     
+            Toast.show('Login Successful',Toast.LONG,Toast.TOP,stylesuccess);
+
             } catch (e) {
               console.log("error hai",e)
-                   Alert.alert(
-      "Username or Password is Wrong  ",  );
+             Toast.show('Email or Password  wrong and  add all the fields',Toast.LONG,Toast.TOP,styletoast);
 
             }
     })
@@ -67,25 +73,36 @@ export default class Login extends React.Component {
 
 render() {
 
+  const {isLoading}=this.state
+
   return (
 
 
   <ImageBackground 
   source={require('../../images/loginback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
+     <KeyboardAvoidingView enabled behavior={ Platform.OS === 'ios'? 'padding': null}
+                style= {styles.FlexGrowOne}>
    <View style={styles.container}>
+
     <Logo/>
 
-       
+   
 
-   <Text style={styles.input}>Come In</Text>
+ 
+
+<View style={styles.sideByside}>
+  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:20,marginTop:20}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:20,marginTop:20}}>FIT</Text>
+    <Text style={{fontSize:15,color:'black',marginTop:0,marginBottom:20,marginTop:20,marginLeft:20}}>LOGIN </Text>
+</View>
 
      <View style={styles.inputContainer}>
   
        
          <TextInput 
           style={styles.inputs}
-          placeholder='Email'
+          placeholder='Username'
           autoCapitalize="none"
           value={this.state.Email}
           onChangeText={val => this.onChangeText('email', val)}
@@ -114,7 +131,11 @@ render() {
 
             <TouchableOpacity style={styles.submitButtonText}
               onPress={this.signUp}>
-             <Text style={styles.signUpText}>Login</Text>
+              {this.state.isLoading ? (
+                <ActivityIndicator animating={this.state.isLoading} size={"large"} color={"white"} />
+                ) : (
+                  <Text style={styles.signUpText}>Login</Text>
+                )}
              </TouchableOpacity>
 
 
@@ -123,6 +144,7 @@ render() {
              <Text style={styles.signUpText}>Don't have a account</Text>
              </TouchableOpacity>
       </View>
+      </KeyboardAvoidingView>
       </ImageBackground>
     )
 
@@ -135,6 +157,9 @@ const styles = StyleSheet.create({
    justifyContent: 'center',
    alignItems: 'center',
   },
+     FlexGrowOne: {
+        flexGrow : 1
+    },
   input: {
    margin: 15,
    fontSize: 25,
@@ -159,7 +184,11 @@ const styles = StyleSheet.create({
    marginTop:10,
 
  },
-
+ sideByside:{
+  alignItems:'center',
+  justifyContent:'center',
+  flexDirection:'row',
+},
  submitButtonTextone:{
   color: '#FFFFFF',
    width:170,

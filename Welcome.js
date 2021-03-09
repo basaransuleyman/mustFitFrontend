@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-import Logo from '../pages/Logo';
+import Logos from '../pages/Logos';
 
 export default class Welcome extends Component<{}> {
   render(){
@@ -19,7 +19,7 @@ export default class Welcome extends Component<{}> {
   source={require('../../images/back.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
             <View style={styles.container}>
-           <Logo/>
+           <Logos/>
              <TouchableOpacity style={styles.submitButtonText}
              onPress={()=>this.props.navigation.navigate('Login')}>
              <Text style={styles.signUpText}>Login</Text>

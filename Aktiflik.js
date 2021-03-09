@@ -20,21 +20,25 @@ export default class Welcome extends Component<{}> {
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
             <View style={styles.container}>
            <Logo/>
-             <TouchableOpacity style={styles.submitButtonText}
-             onPress={()=>this.props.navigation.navigate('Login')}>
-             <Text style={styles.signUpText}>1-2 Days/Week</Text>
+            <TouchableOpacity style={styles.submitButtonText}
+             onPress={()=>this.props.navigation.navigate('sifirGun')}>
+             <Text style={styles.signUpText}>Mointless 0 Days         > </Text>
              </TouchableOpacity>
              <TouchableOpacity style={styles.submitButtonText}
-              onPress={()=>this.props.navigation.navigate('SignUp')}>
-             <Text style={styles.signUpText}>3-5 Days/Week</Text>
+             onPress={()=>this.props.navigation.navigate('birikiGun')}>
+             <Text style={styles.signUpText}>1-2 Days/Week         > </Text>
              </TouchableOpacity>
-              <TouchableOpacity style={styles.submitButtonTextone}
-              onPress={()=>this.props.navigation.navigate('Hedef')}>
-             <Text style={styles.signUpTextone}>5+ Days/Week</Text>
+             <TouchableOpacity style={styles.submitButtonText}
+              onPress={()=>this.props.navigation.navigate('ucdordGun')}>
+             <Text style={styles.signUpText}>3-4 Days/Week         > </Text>
              </TouchableOpacity>
-              <TouchableOpacity style={styles.submitButtonTextone}
-              onPress={()=>this.props.navigation.navigate('Hedef')}>
-             <Text style={styles.signUpTextone}>Mointless</Text>
+              <TouchableOpacity style={styles.submitButtonText}
+              onPress={()=>this.props.navigation.navigate('besaltiGun')}>
+             <Text style={styles.signUpTextone}>5-6 Days/Week         > </Text>
+             </TouchableOpacity>
+              <TouchableOpacity style={styles.submitButtonText}
+              onPress={()=>this.props.navigation.navigate('yediGun')}>
+             <Text style={styles.signUpTextone}>All Days/Week         > </Text>
              </TouchableOpacity>
            </View>
            </ImageBackground>
@@ -57,17 +61,6 @@ const styles = StyleSheet.create({
 
  },
 
- submitButtonTextone:{
-   color: '#FFFFFF',
-   backgroundColor: 'rgba(0,0,0,0)',
-   width:250,
-   height:45,
-   borderRadius:10,
-   justifyContent: 'center',
-   alignItems: 'center',
-    marginTop:10,
-
- },
  signUpTextone:{
   color: 'white',
    alignItems: 'center',
@@ -82,7 +75,7 @@ const styles = StyleSheet.create({
    borderRadius:10,
    justifyContent: 'center',
    alignItems: 'center',
-    marginTop:10,
+    marginTop:30,
  },
  signUpText:{
    color: '#FFFFFF',

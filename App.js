@@ -7,10 +7,14 @@
     SafeAreaView
   } from 'react-native';
 
+  import SplashScreen from 'react-native-splash-screen';
   import Router from './src/Router';
 
 
+
+
   export default class App extends React.Component {
+
     render(){
     return (
       

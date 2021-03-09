@@ -5,15 +5,18 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Dimensions
   
 } from 'react-native';
 
 
- 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Logo from '../pages/Logo';
 
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default class Welcome extends Component<{}> {
 
@@ -22,6 +25,7 @@ export default class Welcome extends Component<{}> {
     super(props);
     this.state = { 
       gender:'',
+      isLoading:false,
     
     }
 }
@@ -29,41 +33,60 @@ export default class Welcome extends Component<{}> {
   render(){
 
       const { gender  }=this.state;
+      const {isLoading}=this.state;
   return (
      <ImageBackground 
   source={require('../../images/cinsiyetback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 1}}>
       <TouchableOpacity style={styles.buttonback}
              onPress={()=>this.props.navigation.navigate('Welcome')}>
-             <Text style={{   color: 'black',    fontWeight: 'bold',alignItems: 'center',fontSize: 25,transform: [{ rotate: '180deg' }]}}>></Text>
+             <Text style={{   color: '#24465c',    fontWeight: 'bold',alignItems: 'center',fontSize: 25,transform: [{ rotate: '180deg' }]}}>></Text>
              </TouchableOpacity>
 
             <View style={styles.container}>
 
            <Logo/>
 
-
-
+<View style={styles.sideByside}>
+  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:0,marginTop:0,}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:0,marginTop:0,}}>FIT</Text>
+</View>   
+               
                  <View style={styles.sideByside}>
           <TouchableOpacity 
              style={[styles.button , gender === 'woman' ? styles.active : null]}
-             onPress={()=>this.props.navigation.navigate('BilgilerKadın')}
-             >
-             <Text style={{ marginTop:0,
-    color:'white',
+             onPress={()=>this.props.navigation.navigate('BilgilerKadın')}>
+              <View style={styles.iconx}> 
+              <Icon name="female" size={25} color='white' />
+              </View> 
+             {this.state.isLoading ? (
+                <ActivityIndicator animating={this.state.isLoading} size={"large"} color={"white"} />
+                ) : ( 
+             <Text style={{ color:'white',
     textAlign:'center'}}>Woman</Text>
+    )}
              </TouchableOpacity>
 
                
+            
 
-   <TouchableOpacity 
-         style={[styles.button , gender === 'man' ? styles.active : null]}
-            onPress={()=>this.props.navigation.navigate('BilgilerErkek')}
-             >
-              <Text style={{ marginTop:0,
-    color:'white',
+       
+          <TouchableOpacity 
+             style={[styles.button , gender === 'woman' ? styles.active : null]}
+             onPress={()=>this.props.navigation.navigate('BilgilerErkek')}>
+              <View style={styles.iconx}> 
+              <Icon name="male" size={25} color='white' />
+              </View> 
+             {this.state.isLoading ? (
+                <ActivityIndicator animating={this.state.isLoading} size={"large"} color={"white"} />
+                ) : ( 
+             <Text style={{ color:'white',
     textAlign:'center'}}>Man</Text>
+    )}
              </TouchableOpacity>
+
+
+   
  </View>
 
            </View>
@@ -78,7 +101,7 @@ const styles = StyleSheet.create({
    flex: 1,
    justifyContent: 'center',
    alignItems: 'center',
-   marginBottom:150,
+   marginBottom:200,
 
   },
 
@@ -91,12 +114,16 @@ const styles = StyleSheet.create({
   marginTop:50
 
 
+
+},
+iconx:{
+alignItems:'center',
+justifyContent:'center',
 },
   button:{
        backgroundColor: '#FF5A54',
-       borderRadius:100,
-       //width:50,
-       //height:40,
+       borderRadius:100, 
+       //height:60,
        flex:1,
        padding:10,
        //alignContent:'center',
@@ -114,7 +141,7 @@ const styles = StyleSheet.create({
    width:40,
    height:25,
    marginTop:30,
-   marginBottom:-100
+   marginBottom:0
 
 
   },
