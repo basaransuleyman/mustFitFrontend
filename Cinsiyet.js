@@ -38,10 +38,7 @@ export default class Welcome extends Component<{}> {
      <ImageBackground 
   source={require('../../images/cinsiyetback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 1}}>
-      <TouchableOpacity style={styles.buttonback}
-             onPress={()=>this.props.navigation.navigate('Welcome')}>
-             <Text style={{   color: '#24465c',    fontWeight: 'bold',alignItems: 'center',fontSize: 25,transform: [{ rotate: '180deg' }]}}>></Text>
-             </TouchableOpacity>
+    
 
             <View style={styles.container}>
 
@@ -68,9 +65,6 @@ export default class Welcome extends Component<{}> {
              </TouchableOpacity>
 
                
-            
-
-       
           <TouchableOpacity 
              style={[styles.button , gender === 'woman' ? styles.active : null]}
              onPress={()=>this.props.navigation.navigate('BilgilerErkek')}>
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
   alignItems:'center',
   justifyContent:'center',
   flexDirection:'row',
-  marginTop:50
+  marginTop:20
 
 
 
@@ -121,7 +115,7 @@ alignItems:'center',
 justifyContent:'center',
 },
   button:{
-       backgroundColor: '#FF5A54',
+       backgroundColor: '#24465c',
        borderRadius:100, 
        //height:60,
        flex:1,
@@ -140,7 +134,7 @@ justifyContent:'center',
    justifyContent: 'center',
    width:40,
    height:25,
-   marginTop:30,
+   marginTop:10,
    marginBottom:0
 
 

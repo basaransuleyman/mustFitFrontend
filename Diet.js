@@ -149,7 +149,7 @@ getData= async ()=>{
   source={require('../../images/profileback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
 
-
+ <ScrollView style={styles.scrollView}>
 <View style={styles.header}>
  <View style={styles.sideByside}>
       <View style={styles.iconx}>
@@ -229,7 +229,7 @@ getData= async ()=>{
       <Text>* 1 cup = ~250 milliliters, 1 table spoon = 14.2 gram</Text>
        </ScrollView>
 </View>
-     
+            </ScrollView>
            </ImageBackground>
         
   );
@@ -298,7 +298,7 @@ marginRight:0
 
   },
    scrollView:{
-  marginHorizontal: 20,
+  marginHorizontal:0,
  },
   HeadStyle: { 
     height: 40,

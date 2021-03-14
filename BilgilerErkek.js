@@ -161,6 +161,7 @@ export default class BilgilerErkek extends Component {
                  <TextInput style={styles.inputs}
                  placeholder="Your's name"
                  keyboardType="default"
+                     maxLength={10}
                  autoCapitalize="characters"
                  underlineColorAndroid='transparent'
                  value={this.state.name}
@@ -174,6 +175,7 @@ export default class BilgilerErkek extends Component {
                  <TextInput style={styles.inputs}
                  placeholder="Age"
                  keyboardType="numeric"
+                     maxLength={2}
                  underlineColorAndroid='transparent'
                  value={this.state.age}
                  onChangeText={val => this.onChangeText('age',val)}/>
@@ -184,6 +186,7 @@ export default class BilgilerErkek extends Component {
                  <TextInput style={styles.inputs}
                  placeholder="Height(cm)"
                  keyboardType="numeric"
+                   maxLength={3}
                  underlineColorAndroid='transparent'
                  value={this.state.height}
                  onChangeText={val => this.onChangeText('height',val)}/>
@@ -198,6 +201,7 @@ export default class BilgilerErkek extends Component {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Weight(kg)"
+                   maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.weight}
@@ -211,6 +215,7 @@ export default class BilgilerErkek extends Component {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Neck(cm)"
+                   maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.neck}
@@ -224,6 +229,7 @@ export default class BilgilerErkek extends Component {
                  <TextInput style={styles.inputs}
                  placeholder="Waist(cm)"
                  keyboardType="numeric"
+                   maxLength={3}
                  underlineColorAndroid='transparent'
                  value={this.state.belly}
                  onChangeText={val => this.onChangeText('belly',val)}/>
@@ -368,7 +374,7 @@ sideByside:{
    height:40,
    opacity:0.8,
    marginRight:35,
-   marginBottom:15,
+   marginBottom:10,
    flexDirection: 'row',
    alignItems:'center',
    marginLeft:35
@@ -405,21 +411,22 @@ sideByside:{
    width:170,
    height:40,
    borderRadius:10,
-   marginTop:10,
+   marginTop:5,
     
 
  },
 
  signUpTextfour:{
-   color: '#FFFFFF',
+  color: '#FFFFFF',
    alignItems: 'center',
    justifyContent: 'center',
-      color: '#FFFFFF',
-   backgroundColor:'#FF5A54',
-   width:120,
+   color: '#FFFFFF',
+   backgroundColor:'#24465c',
+   width:170,
    height:45,
    borderRadius:10,
-   marginTop:20,
+   marginTop:15,
+    
     
 
  },
@@ -433,7 +440,7 @@ sideByside:{
     color: '#FFFFFF',
    alignItems: 'center',
    fontSize: 15,
-   marginTop:10,
+   marginTop:5,
  },
 
  iconbutton:{

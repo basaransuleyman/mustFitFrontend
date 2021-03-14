@@ -22,10 +22,17 @@ render(){
 			
       <View	style={{flex:1,backgroundColor:'#ffffff'}}>
 
+      	<View style={styles.sideByside}>
+       
+ 		<Text  style={{fontSize:25,fontWeight:'bold',fontStyle:'italic',color:'#24465c',width:70,textAlign:'center'}}>MUST</Text>
+ 		<Text  style={{fontSize:25,fontWeight:'bold',fontStyle:'italic',color:'#88e315',width:40,textAlign:'center'}}>FIT</Text>
+ 		
+        </View>
 
- 		<Text  style={{fontSize:25,fontWeight:'bold',fontStyle:'italic',color:'#24465c',width:400,marginBottom:0,marginTop:0,textAlign:'center'}}>M U S T</Text>
- 		<Text  style={{fontSize:25,fontWeight:'bold',fontStyle:'italic',color:'#88e315',width:400,marginBottom:0,marginTop:0,textAlign:'center'}}>F I T</Text>
-     
+
+
+      	<View style={{width:500}}>
+      	</View>
       <LottieView	
             source={require('../../assets/splash.json')}
       		autoPlay

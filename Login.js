@@ -18,11 +18,12 @@ import {
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const styletoast={backgroundColor: "red",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
-const stylesuccess ={backgroundColor: "green",width: 300,color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+const styletoast={backgroundColor: "red",color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
+const stylesuccess ={backgroundColor: "green",color: "#ffffff",fontSize: 12,lineHeight: 2,lines: 1,borderRadius: 15,fontWeight: "bold",yOffset: 40};
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-native';
+
 
 
 import Logo from '../pages/Logo';
@@ -31,7 +32,8 @@ export default class Login extends React.Component {
 
 
   state = {
-   email: '', password: '' , isLoading:false
+   email: '', password: '' , isLoading:false,
+  
   }
 
   onChangeText = (key, val) => {
@@ -64,7 +66,7 @@ export default class Login extends React.Component {
 
             } catch (e) {
               console.log("error hai",e)
-             Toast.show('Email or Password  wrong and  add all the fields',Toast.LONG,Toast.TOP,styletoast);
+             Toast.show('Fill the all blanks or wrong username/password',Toast.LONG,Toast.TOP,styletoast);
 
             }
     })
@@ -81,28 +83,30 @@ render() {
   <ImageBackground 
   source={require('../../images/loginback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
+
+  
      <KeyboardAvoidingView enabled behavior={ Platform.OS === 'ios'? 'padding': null}
                 style= {styles.FlexGrowOne}>
+
+
+
    <View style={styles.container}>
-
-    <Logo/>
-
-   
+       <Logo/>
+<View style={styles.sideByside}>
+  <Text style={{fontSize:20,color:'#24465c',marginBottom:0,marginTop:20}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#88e315',marginBottom:0,marginTop:20}}>FIT</Text>
+    <Text style={{fontSize:15,color:'white',marginBottom:0,marginTop:20,marginLeft:20}}>LOGIN </Text>
+</View>
 
  
 
-<View style={styles.sideByside}>
-  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:20,marginTop:20}}>MUST</Text>
-  <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:20,marginTop:20}}>FIT</Text>
-    <Text style={{fontSize:15,color:'black',marginTop:0,marginBottom:20,marginTop:20,marginLeft:20}}>LOGIN </Text>
-</View>
-
      <View style={styles.inputContainer}>
   
-       
+
          <TextInput 
           style={styles.inputs}
           placeholder='Username'
+          maxLength={15}
           autoCapitalize="none"
           value={this.state.Email}
           onChangeText={val => this.onChangeText('email', val)}
@@ -115,6 +119,7 @@ render() {
         <TextInput
           style={styles.inputs}
           placeholder='Password'
+          maxLength={15}
           secureTextEntry={true}
           value={this.state.password}
           autoCapitalize="none"
@@ -163,7 +168,7 @@ const styles = StyleSheet.create({
   input: {
    margin: 15,
    fontSize: 25,
-   marginBottom :30,
+   marginBottom :10,
    marginTop :0,
    color : 'white',
   },
@@ -173,15 +178,16 @@ const styles = StyleSheet.create({
    margin: 15,
    height: 60,
  },
- submitButtonText:{
+submitButtonText:{
    color: '#FFFFFF',
-   backgroundColor:'#FF5A54',
-   width:170,
+   backgroundColor:'#24465c',
+   width:100,
    height:45,
    borderRadius:10,
    justifyContent: 'center',
    alignItems: 'center',
-   marginTop:10,
+   marginTop:20,
+   marginBottom:0,
 
  },
  sideByside:{
@@ -189,6 +195,7 @@ const styles = StyleSheet.create({
   justifyContent:'center',
   flexDirection:'row',
 },
+
  submitButtonTextone:{
   color: '#FFFFFF',
    width:170,
@@ -199,8 +206,9 @@ const styles = StyleSheet.create({
    marginTop:0,
 
  },
+
  signUpText:{
-   color: '#FFFFFF',
+   color: 'white',
    alignItems: 'center',
 
  },
@@ -210,9 +218,10 @@ const styles = StyleSheet.create({
    borderRadius:5,
     opacity:0.8,
    borderBottomWidth: 1,
-   width:350,
+   width:275,
    height:45,
-   marginBottom:10,
+   marginTop:20,
+   marginBottom:0,
    flexDirection: 'row',
    alignItems:'center'
  },

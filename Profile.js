@@ -8,6 +8,7 @@ import {
   ImageBackground,
   FlatList,
   Dimensions,
+  KeyboardAvoidingView,
   ActivityIndicator,
   
 } from 'react-native';
@@ -93,6 +94,7 @@ getData= async ()=>{
     });
 
            try {
+            
              console.log(this.state.data)
              console.log(postid)
             } catch (e) {
@@ -114,6 +116,8 @@ getData= async ()=>{
   source={require('../../images/profileback.jpg')}
   style={{width:'100%' , height:'100%',  opacity: 0.9}}>
 
+
+  
 
 
 
@@ -140,13 +144,7 @@ getData= async ()=>{
     </View>
 </View>
 
-  <View style={styles.sideBysideone}>
-               <TouchableOpacity style={styles.submitButtonTextone}
-                   onPress={()=>this.props.navigation.navigate('Login')}>
-              <Icon name="sign-out-alt" size={30} color='red' /> 
-              <Text style={{textAlign:'center',marginTop:5,marginLeft:5,fontWeight:'bold'}}>LOGOUT</Text> 
-              </TouchableOpacity>
-              </View>
+
  
      <View style={{ flex: 1 }}>
       {isLoading ? <ActivityIndicator/> : (
@@ -200,12 +198,28 @@ getData= async ()=>{
 
             
             <View style={styles.sideBysideone}>
-               <TouchableOpacity style={styles.submitButtonTextone}
-                 onPress={()=>this.deletePost(item._id)}>
 
-              <Icon name="trash-alt" size={20} color='red' /> 
-              <Text style={{textAlign:'center',marginTop:5,marginLeft:5}}>Delete informations </Text> 
+                  <TouchableOpacity style={styles.submitButtonTextone}
+                   onPress={()=>this.props.navigation.navigate('Login')}>
+              <Icon name="sign-out-alt" size={20} color='#88e315' /> 
+              <Text style={{textAlign:'center',marginTop:0,marginLeft:0}}>Logout</Text> 
               </TouchableOpacity>
+      
+             
+               <TouchableOpacity style={styles.submitButtonTextone}
+                   onPress={()=>this.props.navigation.navigate('Cinsiyet')}>
+              <Icon name="plus-circle" size={50} color='#24465c' /> 
+              <Text style={{textAlign:'center',marginTop:0,marginLeft:0}}>New</Text> 
+              </TouchableOpacity>
+
+         <TouchableOpacity style={styles.submitButtonTextone}
+                 onPress={()=>this.deletePost(item._id)}>
+              <Icon name="trash-alt" size={20} color='red' /> 
+              <Text style={{textAlign:'center',marginTop:0,marginLeft:0}}>Delete</Text> 
+              </TouchableOpacity>
+
+      
+
               </View>
 
 
@@ -218,7 +232,6 @@ getData= async ()=>{
         />
       )}
     </View>
-
 
 
      
@@ -245,10 +258,10 @@ const styles = StyleSheet.create({
   sideBysideone:{
   flexDirection:'row',
   marginBottom:0,
-  marginLeft:250,
+  marginLeft:0,
    alignItems:'center',
   justifyContent:'center',
-  marginTop:0,
+  marginTop:20,
   },
   header:{
     backgroundColor:'black',
@@ -260,12 +273,14 @@ const styles = StyleSheet.create({
  submitButtonTextone:{
    color: '#FFFFFF',
    backgroundColor: 'rgba(0,0,0,0)',
-   width:100,
+   width:60,
    height:45,
    borderRadius:10,
    justifyContent: 'center',
    alignItems: 'center',
     marginTop:0,
+    marginLeft:20,
+    marginRight:20
 
  },
  middle:{

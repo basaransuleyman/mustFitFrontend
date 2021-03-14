@@ -16,7 +16,7 @@ export default class Logo extends React.Component {
            <View style={styles.container}>
              <Image source={logo}
              resizeMode={'contain'}
-             style={{   justifyContent: 'center',alignItems: 'center',marginTop:-100,marginBottom:-50,width:250, height:250}}/>
+             style={{   justifyContent: 'center',alignItems: 'center',marginTop:-90,marginBottom:-50,width:100, height:100}}/>
              
 
            </View>

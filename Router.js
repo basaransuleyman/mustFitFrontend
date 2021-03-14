@@ -4,7 +4,6 @@ import {
 	createAppContainer,
 }  from 'react-navigation';
 
-import Welcome from './pages/Welcome';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import BilgilerErkek from './pages/BilgilerErkek';
@@ -30,9 +29,6 @@ const AppSwitchNavigator = createSwitchNavigator(
              },
              LogoSplash:{
                   screen:LogoSplash
-             },
-             Welcome:{
-                   screen:Welcome
              },
              BilgilerErkek:{
                  screen:BilgilerErkek

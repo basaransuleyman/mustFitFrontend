@@ -136,7 +136,7 @@ sumbitData = async ()=> {
 
  <View style={styles.sideByside}>
 
-  <Text style={{fontSize:20,color:'white',marginTop:0,marginBottom:30,marginTop:0}}>MUST</Text>
+  <Text style={{fontSize:20,color:'#24465c',marginTop:0,marginBottom:30,marginTop:0}}>MUST</Text>
   <Text style={{fontSize:20,color:'#88e315',marginTop:0,marginBottom:30,marginTop:0,}}>FIT</Text>
    <Text style={{fontSize:15,color:'white',marginTop:0,marginBottom:30,marginTop:0,marginLeft:20}}>INFORMATIONS </Text>
 </View>
@@ -153,6 +153,7 @@ sumbitData = async ()=> {
                  <TextInput style={styles.inputs}
                  placeholder="Your's name"
                  keyboardType="default"
+                     maxLength={10}
                  autoCapitalize="characters"
                  underlineColorAndroid='transparent'
                  value={this.state.name}
@@ -166,6 +167,7 @@ sumbitData = async ()=> {
                  <TextInput style={styles.inputs}
                  placeholder="Age"
                  keyboardType="numeric"
+                     maxLength={2}
                  underlineColorAndroid='transparent'
                  value={this.state.age}
                  onChangeText={val => this.onChangeText('age',val)}/>
@@ -175,6 +177,7 @@ sumbitData = async ()=> {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Height(cm)"
+                     maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.height}
@@ -191,6 +194,7 @@ sumbitData = async ()=> {
                  <TextInput style={styles.inputs}
                  placeholder="Weight(kg)"
                  keyboardType="numeric"
+                     maxLength={3}
                  underlineColorAndroid='transparent'
                  value={this.state.weight}
                  onChangeText={val => this.onChangeText('weight',val)}/>
@@ -203,6 +207,7 @@ sumbitData = async ()=> {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Neck(cm)"
+                     maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.neck}
@@ -215,6 +220,7 @@ sumbitData = async ()=> {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Waist(cm)"
+                     maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.belly}
@@ -225,6 +231,7 @@ sumbitData = async ()=> {
                  <View style={styles.inputContainer}>
                  <TextInput style={styles.inputs}
                  placeholder="Hip(cm)"
+                     maxLength={3}
                  keyboardType="numeric"
                  underlineColorAndroid='transparent'
                  value={this.state.hip}
@@ -336,7 +343,7 @@ sideByside:{
    justifyContent: 'center',
    width:40,
    height:25,
-   marginTop:10,
+   marginTop:10
 
 
   },
@@ -375,7 +382,7 @@ sideByside:{
    height:40,
    opacity:0.8,
    marginRight:35,
-   marginBottom:15,
+   marginBottom:10,
    flexDirection: 'row',
    alignItems:'center',
    marginLeft:35
@@ -405,11 +412,11 @@ sideByside:{
    alignItems: 'center',
    justifyContent: 'center',
    color: '#FFFFFF',
-   backgroundColor:'#FF5A54',
+   backgroundColor:'#24465c',
    width:170,
    height:45,
    borderRadius:10,
-   marginTop:20,
+   marginTop:15,
     
 
  },
@@ -424,7 +431,7 @@ sideByside:{
    width:170,
    height:40,
    borderRadius:10,
-   marginTop:10,
+   marginTop:5,
     
 
  },
